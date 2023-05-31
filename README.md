@@ -1,7 +1,7 @@
-# PracticaFundamentosReact
-Práctica de fundamentos de REACT
+# PracticaReactAvanzado
+Práctica REACT AVANZADO
 
-Alumno: @XaviRoca (ABR23)
+Alumno: @XaviRoca (JUN23)
 
 
 ## Prerequisitos
