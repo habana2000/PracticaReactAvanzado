@@ -1,0 +1,10 @@
+.search-block {
+  border-width: 2px;
+  border-radius: 2%;
+  border-color: black;
+  background-color: rgb(190, 240, 240);
+}
+
+.search-field {
+  padding: 5px 20px;
+}
