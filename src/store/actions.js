@@ -105,6 +105,7 @@ export const advertLoadedFailure = error => ({
 export const advertLoad =
   advertId =>
   async (dispatch, getState, { service }) => {
+    // debugger;
     const isLoaded = getAdvert(advertId)(getState());
     if (isLoaded) {
       return;

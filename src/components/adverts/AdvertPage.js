@@ -1,36 +1,39 @@
 import Button from '../shared/Button';
 import { useNavigate, useParams } from 'react-router-dom';
 import Layout from '../layout/Layout';
-import { useEffect, useState } from 'react';
-import { getAdvert, deleteAdvert } from './service';
+import { useEffect } from 'react';
+import { deleteAdvert } from './service';
+import { getAdvert } from '../../store/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { advertLoad } from '../../store/actions';
 
 const AdvertPage = () => {
-  const params = useParams();
   const navigate = useNavigate();
-  // const [error, setError] = useState(null);
-  const [advert, setAdvert] = useState(null);
+  const dispatch = useDispatch();
+  const { advertId } = useParams();
+
+  const advert = useSelector(getAdvert(advertId));
 
   useEffect(() => {
-    getAdvert(params.advertId)
-      .then(advert => setAdvert(advert))
-      .catch(error => {
-        if (error.status === 404) {
-          return navigate('/404');
-        }
-        // setError(error);
-      });
-  }, [params.advertId, navigate]);
-
+    dispatch(advertLoad(advertId));
+  }, [dispatch, advertId]);
+  
+  console.log('AdvertPage - advertId:' , advertId);
+  console.log('AdvertPage - advert' , advert);
+  
+  
   const handleDeleteClick = async () => { 
     const confirmed = window.confirm("Do you really want to delete it?");
     if (confirmed) {
-      await deleteAdvert(params.advertId);
+      await deleteAdvert(advertId);
       navigate('/adverts');
     }
   };
-
-  return (
-    <Layout title="Advert detail">{advert && <div>
+  
+  if (advert) {
+  };
+    return (
+      <Layout title="Advert detail">{advert && <div>
       <table>
         <tr>
           <td>
@@ -53,19 +56,19 @@ const AdvertPage = () => {
         <tr>
           <td>
           <Button
-                type="submit"
-                className="newAdvertPage-submit"
-                variant="primary"
-                onClick={handleDeleteClick}
-              >
-                Delete advert
-              </Button>
+          type="submit"
+          className="newAdvertPage-submit"
+          variant="primary"
+          onClick={handleDeleteClick}
+          >
+          Delete advert
+          </Button>
           </td>
         </tr>
       </table>
       </div>}
     </Layout>
-  );
+    );
 };
 
 export default AdvertPage;
