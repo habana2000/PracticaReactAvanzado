@@ -7,7 +7,7 @@ import { getAdvert, deleteAdvert } from './service';
 const AdvertPage = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
   const [advert, setAdvert] = useState(null);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const AdvertPage = () => {
         if (error.status === 404) {
           return navigate('/404');
         }
-        setError(error);
+        // setError(error);
       });
   }, [params.advertId, navigate]);
 

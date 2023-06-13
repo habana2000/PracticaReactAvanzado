@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
-import { getLatestAdverts } from './service';
+// import { getLatestAdverts } from './service';
 import Button from '../shared/Button';
 import Layout from '../layout/Layout';
 import Advert from './Advert';
-import { Link, useNavigate } from 'react-router-dom';
-// import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { useRef } from 'react';
+import { connect } from 'react-redux';
+import { getAdverts, getUi } from '../../store/selectors';
+import { advertsLoaded } from '../../store/actions';
 
 import './AdvertsPage.css'
 
@@ -17,37 +20,22 @@ const EmptyList = () => (
   </div>
 );
 
-const AdvertsPage = () => {
-  const navigate = useNavigate();
+const AdvertsPage = ({ adverts , onAdvertsLoaded, isLoading }) => {
+  // const navigate = useNavigate();
+  const isMounted = useRef(false);
   const [query, setQuery] = useState('');
   const [bottomPrice, setQueryBottomPrice] = useState(null);
   const [topPrice, setQueryTopPrice] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [adverts, setAdverts] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [adverts, setAdverts] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
-      setIsLoading(true);
-      
-
-      try {
-        const adverts = await getLatestAdverts();
-      } catch (error) {
-        if (error.status === 401) {
-          navigate('/login');       
-        } 
-      }
-      
-      const adverts = await getLatestAdverts();
-
-      setAdverts(adverts);
-      setIsLoading(false);
-    }
-
-      fetchData();
-      
-
+    isMounted.current = true;
   }, []);
+
+  useEffect(() => {
+    onAdvertsLoaded();
+  }, [onAdvertsLoaded]);
 
   let filteredAdverts = adverts.filter(advert =>
     (advert.name ?? '').toUpperCase().startsWith(query.toUpperCase()),
@@ -117,4 +105,13 @@ const AdvertsPage = () => {
   );
 };
 
-export default AdvertsPage;
+const mapStateToProps = state => ({
+  adverts: getAdverts(state),
+  ...getUi(state)
+});
+
+const mapDispatchToProps = {
+  onAdvertsLoaded: advertsLoaded,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdvertsPage);
