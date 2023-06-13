@@ -3,19 +3,24 @@ import Layout from '../layout/Layout';
 import Button from '../shared/Button';
 import Photo from '../shared/Photo';
 import FormField from '../shared/FormField'
-// import ListaSeleccionMultiple from '../shared/ListElement';
-
 
 import './NewAdvertPage.css';
-import { createAdvert, getTags } from './service';
-import { useNavigate } from 'react-router-dom';
+import { getTags } from './service';
+// import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { advertCreate } from '../../store/actions';
+import { getUi } from '../../store/selectors';
 
 const MIN_CHARACTERS = 5;
 const MAX_CHARACTERS_NAME = 60;
 
 const NewAdvertPage = () => {
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  const { isLoading } = useSelector(getUi);
+  
+  // const navigate = useNavigate();
+  // const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState('');
   const [sale, setSale] = useState(null);
   const [price, setPrice] = useState(null);
@@ -54,6 +59,7 @@ const NewAdvertPage = () => {
     setPhoto(event.target.files[0]);
   };   
 
+  /*
   const handleSubmit = async event => {
     event.preventDefault();
     try {
@@ -67,6 +73,13 @@ const NewAdvertPage = () => {
       }
     }
   };
+  */
+  
+  const handleSubmit = async event => {
+    event.preventDefault();
+    dispatch(advertCreate({ name, sale, price, tags, photo }));
+  };
+
 
   const isDisabled = isLoading || 
     name.length < MIN_CHARACTERS ||

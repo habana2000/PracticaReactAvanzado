@@ -34,47 +34,19 @@ Usuario: xroca@vilamatica.com / 1234
 * **ROUTER** --> npm install react-router-dom
 * **classnames** --> npm install classnames
 * **styled-components** --> npm install --save styled-components
+* **REDUX** --> npm install redux (https://redux.js.org)
+* **REDUX-DevTools** --> npm install --save @redux-devtools/extension (https://github.com/reduxjs/redux-devtools)
+* **REDUX-thunk** --> npm install redux-thunk (https://github.com/reduxjs/redux-thunk)
 ### Plug-in VSC
 
 * **Prettier** - Code formatter
 
 ### Extensiones browser
 
-* Chrome: **React Developer Tools**
-* Firefox: **React Developer Tools**
+* Developer Tools: **React Developer Tools**
+* Redux DevTools: **REDUX-DevTools** 
 
 ## Comentarios sobre la práctica
-
-* Se ha asegurado el funcionamiento de todos los requisitos de la práctica, pero sin demasiadas florituras.
-* La maquetación no está bien trabajada, por falta de tiempo
-* Hay funcionalidades que se cumplen , pero creo que no estan demasiado bien programadas. Por ejemplo useEffect() de AdvertsPage
-```js
-  useEffect(() => {
-    async function fetchData() {
-      setIsLoading(true);
-      
-      try {
-        // en teoría aquí se deberían recuperar los anuncios
-        const adverts = await getLatestAdverts();
-        //...
-      } catch (error) {
-        if (error.status === 401) {
-          navigate('/login');       
-        } 
-      }
-      
-      // si no hago esta segunda llamada no me recupera los anuncios
-      const adverts = await getLatestAdverts();
-      // ...
-      setAdverts(adverts);
-      setIsLoading(false);
-    }
-
-      fetchData();
-
-  }, []);
-```
-* En general me ha servido mucho para entender la filosofía REACT. Las clases estan muy bien pero no se retiene conocimiento. Es necesario tener que pelearse unas horas con el código.
 
 
 

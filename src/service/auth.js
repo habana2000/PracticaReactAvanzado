@@ -1,16 +1,14 @@
 import client, {
   removeAuthorizationHeader,
   setAuthorizationHeader,
-} from '../../api/client';
-import storage from '../../utils/storage';
+} from '../api/client';
+import storage from '../utils/storage';
 
-export const login = (credentials, rememberPassword) => {
-
+export const login = credentials => {
+  console.log('credentials', credentials);
   return client.post('/api/auth/login', credentials).then(({ accessToken }) => {
     setAuthorizationHeader(accessToken);
-    if (rememberPassword === true) {
-      storage.set('auth', accessToken);
-    }
+    storage.set('auth', accessToken);
   });
 };
 

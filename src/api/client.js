@@ -27,4 +27,7 @@ export const removeAuthorizationHeader = () => {
   delete client.defaults.headers.common['Authorization'];
 };
 
+console.log('client AXIOS', client);
+console.log('Entorno: ', process.env.REACT_APP_API_BASE_URL);
+
 export default client;

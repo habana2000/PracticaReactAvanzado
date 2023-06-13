@@ -1,24 +1,21 @@
+import { useDispatch, useSelector } from 'react-redux';
+
 import Button from '../shared/Button';
 
-import { logout } from '../auth/service';
+// import { ReactComponent as Icon } from '../../assets/advert.png';
 import classNames from 'classnames';
 
 import './Header.css';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from '../auth/context';
+import { Link, NavLink } from 'react-router-dom';
+import { authLogout } from '../../store/actions';
+import { getIsLogged } from '../../store/selectors';
+
 
 const Header = ({ className }) => {
-  const navigate = useNavigate();
-  const { isLogged, onLogout } = useAuth();
+  const isLogged = useSelector(getIsLogged);
+  const dispatch = useDispatch();
 
-  const handleLogoutClick = async () => { 
-    const confirmed = window.confirm("Do you really want to log out?");
-    if (confirmed) {
-      await logout();
-      onLogout();
-      navigate('/login');
-    }
-  };
+  const onLogout = () => dispatch(authLogout());
 
   return (
     <header className={classNames('header', className)}>
@@ -44,7 +41,7 @@ const Header = ({ className }) => {
           See latest adverts
         </NavLink>
         {isLogged ? (
-          <Button onClick={handleLogoutClick} className="header-button">
+          <Button onClick={onLogout} className="header-button">
             Logout
           </Button>
         ) : (
