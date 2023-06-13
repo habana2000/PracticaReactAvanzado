@@ -18,10 +18,6 @@ const AdvertPage = () => {
     dispatch(advertLoad(advertId));
   }, [dispatch, advertId]);
   
-  console.log('AdvertPage - advertId:' , advertId);
-  console.log('AdvertPage - advert' , advert);
-  
-  
   const handleDeleteClick = async () => { 
     const confirmed = window.confirm("Do you really want to delete it?");
     if (confirmed) {
