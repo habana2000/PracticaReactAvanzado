@@ -14,5 +14,12 @@ export const getAdvert = advertId => {
 
 export const createAdvert = advert => {
   const url = advertsUrl;
-  return client.post(url, advert, {});
+  const headers = {
+    'Content-Type': 'multipart/form-data',
+  };
+  console.log('service/adverts.js', advert);
+  return client.post(url, advert, { headers});
 };
+
+
+
