@@ -8,7 +8,7 @@ exports[`LoginPage snapshot 1`] = `
     <h1
       class="loginPage-title"
     >
-      Log in to Twitter
+      Log in to Adverts page
     </h1>
     <form>
       <div
@@ -47,6 +47,15 @@ exports[`LoginPage snapshot 1`] = `
           />
         </label>
       </div>
+      <label>
+        <input
+          checked=""
+          name="rememberPassword"
+          type="checkbox"
+          value="true"
+        />
+        Remember password
+      </label>
       <button
         class="sc-beqWaB ctOVvj loginForm-submit"
         disabled=""

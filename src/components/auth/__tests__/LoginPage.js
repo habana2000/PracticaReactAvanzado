@@ -1,5 +1,3 @@
-/*
-
 import { render, screen } from '@testing-library/react';
 import LoginPage from '../LoginPage';
 import { Provider } from 'react-redux';
@@ -15,7 +13,7 @@ describe('LoginPage', () => {
       getState: () => {
         const state = defaultState;
         state.ui.error = error;
-
+        
         return state;
       },
       subscribe: () => {},
@@ -23,23 +21,23 @@ describe('LoginPage', () => {
     };
     return render(
       <Provider store={store}>
-        <LoginPage />
+      <LoginPage />
       </Provider>,
-    );
-  };
-
-  test('snapshot', () => {
-    const { container } = renderComponent();
-    expect(container).toMatchSnapshot();
-  });
-
-  test('should dispatch authLogin action', () => {
-    const email = 'xroca@vilamatica.com';
+      );
+    };
+    
+    test('snapshot', () => {
+      const { container } = renderComponent();
+      expect(container).toMatchSnapshot();
+    });
+        
+    test('should dispatch authLogin action', () => {
+      const email = 'xroca@vilamatica.com';
     const password = '1234';
 
     renderComponent();
 
-    const usernameInput = screen.getByLabelText(/username/);
+    const usernameInput = screen.getByLabelText(/email/);
     const passwordInput = screen.getByLabelText(/password/);
     const submitButton = screen.getByRole('button');
 
@@ -71,5 +69,3 @@ describe('LoginPage', () => {
     expect(uiResetError).toHaveBeenCalled();
   });
 });
-
-*/
