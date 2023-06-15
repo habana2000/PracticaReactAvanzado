@@ -2,7 +2,9 @@ import Button from '../shared/Button';
 import { useNavigate, useParams } from 'react-router-dom';
 import Layout from '../layout/Layout';
 import { useEffect } from 'react';
-import { deleteAdvert } from './service';
+// import { deleteAdvert } from './service';
+// import { deleteAdvert } from '../../service/adverts';
+import { advertDelete } from '../../store/actions';
 import { getAdvert } from '../../store/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { advertLoad } from '../../store/actions';
@@ -21,7 +23,11 @@ const AdvertPage = () => {
   const handleDeleteClick = async () => { 
     const confirmed = window.confirm("Do you really want to delete it?");
     if (confirmed) {
+      /*
       await deleteAdvert(advertId);
+      */
+     console.log('AdvertPage.js handleDeleteClick advertId', advertId);
+      dispatch(advertDelete(advertId));  
       navigate('/adverts');
     }
   };

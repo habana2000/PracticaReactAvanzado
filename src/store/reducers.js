@@ -4,6 +4,7 @@ import {
   ADVERTS_LOADED_SUCCESS,
   ADVERT_CREATED_SUCCESS,
   ADVERT_LOADED_SUCCESS,
+  ADVERT_DELETED_SUCCESS,
   UI_RESET_ERROR,
 } from './types';
 
@@ -44,6 +45,9 @@ export function adverts(state = defaultState.adverts, action) {
   }
   if (action.type === ADVERT_CREATED_SUCCESS) {
     return { ...state, data: [action.payload].concat(state.data) };
+  }
+  if (action.type === ADVERT_DELETED_SUCCESS) {
+    return { ...state, data: state.data.filter(advert => advert.id !== action.payload) };
   }
 
   return state;

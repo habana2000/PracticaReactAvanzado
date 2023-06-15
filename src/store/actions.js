@@ -10,10 +10,13 @@ import {
   ADVERT_LOADED_FAILURE,
   ADVERT_LOADED_SUCCESS,
   ADVERT_LOADED_REQUEST,
-  UI_RESET_ERROR,
   ADVERT_CREATED_SUCCESS,
   ADVERT_CREATED_REQUEST,
   ADVERT_CREATED_FAILURE,
+  ADVERT_DELETED_SUCCESS,
+  ADVERT_DELETED_REQUEST,
+  ADVERT_DELETED_FAILURE,
+  UI_RESET_ERROR,
 } from './types';
 
 export const authLoginRequest = () => ({
@@ -105,7 +108,6 @@ export const advertLoadedFailure = error => ({
 export const advertLoad =
   advertId =>
   async (dispatch, getState, { service }) => {
-    // debugger;
     const isLoaded = getAdvert(advertId)(getState());
     if (isLoaded) {
       return;
@@ -146,6 +148,34 @@ export const advertCreate =
       return createdAdvert;
     } catch (error) {
       dispatch(advertCreateFailure(error));
+    }
+  };
+
+  export const advertDeleteRequest = () => ({
+    type: ADVERT_DELETED_REQUEST,
+  });
+  
+  export const advertDeleteSuccess = advertId => ({
+    type: ADVERT_DELETED_SUCCESS,
+    payload: advertId,
+  });
+  
+  export const advertDeleteFailure = error => ({
+    type: ADVERT_DELETED_FAILURE,
+    error: true,
+    payload: error,
+  });
+  
+  export const advertDelete =
+  advertId =>
+  async (dispatch, _getState, { service }) => {
+    console.log('actions - advertId', advertId);
+    dispatch(advertDeleteRequest());
+    try {
+      await service.adverts.deleteAdvert(advertId);
+      dispatch(advertDeleteSuccess(advertId));
+    } catch (error) {
+      dispatch(advertDeleteFailure(error));
     }
   };
 

@@ -17,8 +17,12 @@ export const createAdvert = advert => {
   const headers = {
     'Content-Type': 'multipart/form-data',
   };
-  console.log('service/adverts.js', advert);
   return client.post(url, advert, { headers});
+};
+
+export const deleteAdvert = advertId => {
+  const url = `${advertsUrl}/${advertId}`;
+  return client.delete(url);
 };
 
 
