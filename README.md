@@ -48,6 +48,43 @@ Usuario: xroca@vilamatica.com / 1234
 
 ## Comentarios sobre la práctica
 
+### Redux
+
+* El estado
+
+```js
+export const defaultState = {
+  auth: false,
+  adverts: {
+    areLoaded: false,
+    data: [],
+  },
+  tags: {
+    areLoaded: false,
+    data: []
+  },
+  ui: {
+    isLoading: false,
+    error: null,
+  },
+};
+```
+
+* Funcionalidades
+  * autenticado
+  * anuncios: lista anuncios, crear anuncio, recuperar un anuncio, borrar un anuncio
+  * tags: [ pendiente implementar ]
+  * ui: estado isLoading
+
+* Módulos específicos
+  * Uso de Thunk
+  * Uso de Router
+  * Uso de middleware
+### Middleware
+
+* 
+
+### Test
 
 
 
