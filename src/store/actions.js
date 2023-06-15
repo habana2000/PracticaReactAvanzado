@@ -31,11 +31,11 @@ export const authLoginFailure = error => ({
 });
 
 export const authLogin =
-  credentials =>
+  (credentials, rememberPassword) =>
   async (dispatch, _getState, { service, router }) => {
     dispatch(authLoginRequest());
     try {
-      await service.auth.login(credentials);
+      await service.auth.login(credentials, rememberPassword);
       // Logged in
       dispatch(authLoginSuccess());
       // Redirect to pathname

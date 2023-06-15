@@ -4,11 +4,12 @@ import client, {
 } from '../api/client';
 import storage from '../utils/storage';
 
-export const login = credentials => {
-  console.log('credentials', credentials);
+export const login = (credentials, rememberPassword) => {
   return client.post('/api/auth/login', credentials).then(({ accessToken }) => {
     setAuthorizationHeader(accessToken);
-    storage.set('auth', accessToken);
+    if (rememberPassword === true) {
+      storage.set('auth', accessToken);
+    };
   });
 };
 

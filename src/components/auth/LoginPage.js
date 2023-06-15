@@ -16,6 +16,7 @@ function LoginPage() {
     email: '',
     password: '',
   });
+  const [rememberPassword, setRememberPassword] = useState(true);
 
   const resetError = () => {
     dispatch(uiResetError());
@@ -23,7 +24,7 @@ function LoginPage() {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    dispatch(authLogin(credentials));
+    dispatch(authLogin(credentials, rememberPassword));
   };
 
   const handleChange = event => {
@@ -31,6 +32,10 @@ function LoginPage() {
       ...credentials,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const handleCheckboxChange = event => {
+    setRememberPassword(rememberPassword ? false : true);
   };
 
   const buttonDisabled =
@@ -57,6 +62,17 @@ function LoginPage() {
           onChange={handleChange}
           value={credentials.password}
         />
+        <label>
+        <input
+          type="checkbox"
+          name="rememberPassword"
+          value= {rememberPassword? rememberPassword : false}
+          checked={rememberPassword === true}
+          onChange={handleCheckboxChange}
+          // onClick={handleCheckboxChange}
+          />
+          Remember password
+        </label>
         <Button
           type="submit"
           variant="primary"
