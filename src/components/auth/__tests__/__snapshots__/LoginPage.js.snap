@@ -57,7 +57,7 @@ exports[`LoginPage snapshot 1`] = `
         Remember password
       </label>
       <button
-        class="sc-beqWaB ctOVvj loginForm-submit"
+        class="sc-aXZVg bjftoS loginForm-submit"
         disabled=""
         type="submit"
       >
